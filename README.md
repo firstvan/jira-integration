@@ -34,4 +34,5 @@ Kódlefedettség generálás:
 ```
 
 A cobertura által generált index.html megtalálható a következő helyen: project_basedir/target/staging.
+
 A jacoco által generált index.html megtalálható a következő helyen: project_basedir/target/staging/jacoco.
