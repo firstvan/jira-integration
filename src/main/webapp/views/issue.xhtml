@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+        <div class="jumbotron">
+            <h2 class="display-4">Feladat részletei</h2>
+        </div>
+
+            <div style="padding-left: 15px; padding-right: 15px;">
+                <div class="row row-border">
+                    <div class="col-3">
+                        Kulcs:
+                    </div>
+                    <div class="col">
+                        #{issueView.issue.key}
+                    </div>
+                </div>
+                <div class="row row-border">
+                    <div class="col-3">
+                        Név:
+                    </div>
+                    <div class="col">
+                        #{issueView.issue.fields.summary}
+                    </div>
+                </div>
+                <div class="row row-border">
+                    <div class="col-3">
+                        Leírás:
+                    </div>
+                    <div class="col">
+                        #{issueView.issue.fields.description}
+                    </div>
+                </div>
+                <div class="row row-border">
+                    <div class="col-3">
+                        Státusz:
+                    </div>
+                    <div class="col">
+                        #{issueView.issue.fields.status.name}
+                    </div>
+                </div>
+                <div class="row row-border">
+                    <div class="col-3">
+                        Módosítva:
+                    </div>
+                    <div class="col">
+                        <h:outputText value="#{issueView.issue.fields.updated}">
+                            <f:convertDateTime pattern="yyyy.MM.dd HH:mm" />
+                        </h:outputText>
+                    </div>
+                </div>
+                <div class="row row-border">
+                    <div class="col-3">
+                        Projekt:
+                    </div>
+                    <div class="col">
+                        #{issueView.issue.fields.project.name}
+                    </div>
+                </div>
+                <div class="row row-border">
+                    <div class="col-3">
+                        Módosítva:
+                    </div>
+                    <div class="col">
+                        <h:outputText value="#{issueView.issue.fields.created}">
+                            <f:convertDateTime pattern="yyyy.MM.dd HH:mm" />
+                        </h:outputText>
+                    </div>
+                </div>
+            </div>
+
+            <h:form id="searchPanel">
+                <div class="searchBorder" style="margin-top: 20px;">
+                    <div class="form-group row justify-content-center">
+                        <label for="c1" class="col-sm-3 col-form-label">Keresett nap:</label>
+                        <div class="col-sm-5">
+                            <h:panelGroup>
+                                <p:calendar id="c1" pattern="yyyy/MM/dd" timeZone="IST"
+                                        value="#{issueView.searchDate}" showOn="button"/>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <div>
+                            <p:commandButton value="Keresés" styleClass="btn btn-primary" id="startSearch" upldate="@form"
+                                             actionListener="#{issueView.changeDay}" process="searchPanel" ajax="false"/>
+                        </div>
+                    </div>
+                </div>
+
+                <p:dataTable var="worklog" value="#{issueView.worklogs}"  rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,20,50" style="padding-top: 50px;">
+                    <p:column headerText="Szerző">
+                        <p:link outcome="/views/worklog" value="#{worklog.author.name}">
+                            <f:param name="issueId" value="#{issueView.issue.key}" />
+                            <f:param name="worklogId" value="#{worklog.id}" />
+                        </p:link>
+                    </p:column>
+                    <p:column headerText="Kezdés">
+                        <h:outputText value="#{worklog.startedWithoutNormalize}">
+                            <f:convertDateTime pattern="yyyy.MM.dd HH:mm" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Eltöltött idő">
+                        <h:outputText value="#{worklog.timeSpent}" />
+                    </p:column>
+                    <p:column headerText="Módosítva">
+                        <h:outputText value="#{worklog.updated}">
+                            <f:convertDateTime pattern="yyyy.MM.dd HH:mm" />
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+
+            </h:form>
+            <p:link id="addWorklog" outcome="newWorklog" value="Worklog hozzáadása">
+                <f:param name="issueId" value="#{issueView.issueId}" />
+            </p:link>
+    </ui:define>
+</ui:composition>

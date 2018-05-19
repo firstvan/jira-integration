@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Jira integration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+<h:body>
+
+<div class="container content-margin-top">
+    <div class="row justify-content-md-center">
+        <div class="col col-6">
+            <div>
+                <h2 class="display-4">Bejelentkezés</h2>
+            </div>
+            <h:form id="loginForm">
+                <div class="form-group">
+                    <label for="j_username">Felhasználónév</label>
+                    <p:inputText id="j_username" autocomplete="off" class="form-control" aria-describedby="userHelpt"
+                                 placeholder="Gépelje be felhasználónevét" value="#{loginView.username}"/>
+                    <small id="userHelpt" class="form-text text-muted">Soha ne ossza meg a felhasználó nevét és jelszavát.</small>
+                </div>
+                <div class="form-group">
+                    <label for="j_password">Jelszó</label>
+                    <p:password  id="j_password" autocomplete="off" class="form-control" placeholder="Jelszó" value="#{loginView.password}"/>
+                </div>
+                <div class="row justify-content-between" style="margin-left: 0px; margin-right: 0px;">
+                    <p:commandButton value="Bejelentkezés" styleClass="btn btn-primary" id="doLogin" upldate="@form"
+                                     actionListener="#{loginView.doLogin}" process="loginForm" ajax="false"/>
+                    <h:commandButton type="reset" value="Törlés" class="btn btn-secondary"/>
+                </div>
+            </h:form>
+        </div>
+    </div>
+    <hr/>
+    <footer>
+        <p class="text-muted">&copy; firstvan</p>
+    </footer>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js" type="text/javascript"></script>
+</h:body>
+</html>

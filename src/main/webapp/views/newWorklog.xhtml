@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+        <div class="jumbotron">
+            <h2 class="display-4">Új worklog rögzítése</h2>
+        </div>
+
+        <h:panelGroup rendered="#{newWorklogView.messageIsNotEmpty()}">
+            <div class="alert alert-danger" role="alert">
+                #{newWorklogView.message}
+            </div>
+        </h:panelGroup>
+
+            <h:form>
+            <div style="padding-left: 15px; padding-right: 15px;">
+                <div class="row row-border">
+                    <div class="col-3">
+                        Kezdés:
+                    </div>
+                    <div class="col">
+                        <p:calendar id="datetime" value="#{newWorklogView.worklog.started}" pattern="yyyy/MM/dd HH:mm" />
+                    </div>
+                </div>
+                <div class="row row-border">
+                    <div class="col-3">
+                        Eltöltött idő:
+                    </div>
+                    <div class="col">
+                        <p:inputText value="#{newWorklogView.worklog.timeSpent}" />
+                    </div>
+                </div>
+                <div class="row row-border">
+                    <div class="col-3">
+                        Megjegyzés:
+                    </div>
+                    <div class="col">
+                        <p:inputTextarea rows="10" cols="50" value="#{newWorklogView.worklog.comment}" />
+                    </div>
+                </div>
+            </div>
+
+            <p:commandButton value="Mentés" id="mentes" upldate="@form" actionListener="#{newWorklogView.save}" styleClass="ui-priority-primary" process="loginForm" ajax="false"/>
+            </h:form>
+    </ui:define>
+</ui:composition>

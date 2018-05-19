@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+        <div class="jumbotron">
+            <h2 class="display-4">Főoldal</h2>
+        </div>
+
+        <h:form id="searchPanel">
+            <div class="searchBorder">
+                <div class="form-group row justify-content-center">
+                    <label for="inputKey" class="col-sm-3 col-form-label">Issue kulcs:</label>
+                    <div class="col-sm-5">
+                        <p:inputText styleClass="form-control" id="inputKey" value="#{indexView.issueKey}" />
+                    </div>
+                </div>
+                <div class="form-group row justify-content-center">
+                    <div>
+                        <p:commandButton value="Keresés" styleClass="btn btn-primary" id="startSearch" upldate="@form"
+                                         actionListener="#{indexView.searchIssue}" process="searchPanel" ajax="false"/>
+                    </div>
+                </div>
+            </div>
+
+            <p:dataTable id="issueTable" var="issue" value="#{indexView.issues}"  rows="10"
+                            paginator="true"
+                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="10,20,50">
+                <p:column headerText="Id">
+                    <p:link outcome="/views/issue" value="#{issue.key}">
+                        <f:param name="issueId" value="#{issue.key}" />
+                    </p:link>
+                </p:column>
+                <p:column headerText="Név">
+                    <h:outputText value="#{issue.fields.summary}" />
+                </p:column>
+                <p:column headerText="Módosítva">
+                    <h:outputText value="#{issue.fields.updated}">
+                        <f:convertDateTime pattern="yyyy.MM.dd HH:mm" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Státusz">
+                    <h:outputText value="#{issue.fields.status.name}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
