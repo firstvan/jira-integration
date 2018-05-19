@@ -1,11 +1,11 @@
 # Jira-integration
 
-Egy egyszeru kis program, ami a lokálisan telepített jirához kapcsolódik,
-és issueval, illetve worklogokkal kapcsolatos muveleteket lehet végrehajtani.
+Egy egyszerÅ± kis webalkalmazÃ¡s, ami a lokÃ¡lisan telepÃ­tett jirÃ¡hoz kapcsolÃ³dik,
+Ã©s issueval, illetve worklogokkal kapcsolatos mÅ±veleteket lehet vÃ©grehajtani.
 
-A program egy egyetemi beadandóhoz készült, a clean-code hiánya és kódolási pontatlanságok jogát fenntartom! (Legfobb ok: idohiány)
+A program egy egyetemi beadandÃ³hoz kÃ©szÃ¼lt, a clean-code hiÃ¡nya Ã©s kÃ³dolÃ¡si pontatlansÃ¡gok jogÃ¡t fenntartom! (LegfÅ‘bb ok: idÅ‘hiÃ¡ny)
 
-Az alkalmazáshoz tesztek is készültek.
+Az alkalmazÃ¡shoz tesztek is kÃ©szÃ¼ltek.
 
 #### Version
 
@@ -14,24 +14,24 @@ Az alkalmazáshoz tesztek is készültek.
 #### Prerequisites:
 * [Apache Maven](https://maven.apache.org)
 * Java-jdk
-* Wildfly alkalmazásszerver
+* Wildfly alkalmazÃ¡sszerver
 
 #### Usage
 
-Deployolható war készítése:
+DeployolhatÃ³ war kÃ©szÃ­tÃ©se:
 ```sh
     $ mvn clean install
 ```
 
-Tesztek futtatása:
+Tesztek futtatÃ¡sa:
 ```sh
     $ mvn test
 ```
 
-Kódlefedettség generálás:
+KÃ³dlefedettsÃ©g generÃ¡lÃ¡s:
 ```sh
     $ mvn site
 ```
 
-A cobertura által generált index.html megtalálható a következo helyen: project_basedir/target/staging.
-A jacoco által generált index.html megtalálható a következo helyen: project_basedir/target/staging/jacoco.
+A cobertura Ã¡ltal generÃ¡lt index.html megtalÃ¡lhatÃ³ a kÃ¶vetkezÅ‘ helyen: project_basedir/target/staging.
+A jacoco Ã¡ltal generÃ¡lt index.html megtalÃ¡lhatÃ³ a kÃ¶vetkezÅ‘ helyen: project_basedir/target/staging/jacoco.
